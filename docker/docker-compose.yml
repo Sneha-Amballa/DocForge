@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  docforge-service:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    container_name: docforge_deployment
+    ports:
+      - "8000:8000"
+    environment:
+      - DOCFORGE_API_HOST=0.0.0.0
+      - DOCFORGE_API_PORT=8000
+      - DOCFORGE_DATASET_ROOT=/app/dataset
+      - DOCFORGE_OUTPUT_ROOT=/app/outputs
+    volumes:
+      - ../dataset:/app/dataset
+      - ../outputs:/app/outputs
+    restart: always
