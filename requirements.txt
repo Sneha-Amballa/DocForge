@@ -1,0 +1,13 @@
+torch
+transformers
+peft
+accelerate
+bitsandbytes
+opencv-python
+pillow
+pandas
+numpy
+scikit-learn
+matplotlib
+tqdm
+lmdb

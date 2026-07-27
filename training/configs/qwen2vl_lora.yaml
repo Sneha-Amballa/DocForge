@@ -1,0 +1,26 @@
+model_id: "Qwen/Qwen2-VL-2B-Instruct"
+batch_size: 4
+gradient_accumulation_steps: 4
+learning_rate: 2e-4
+epochs: 3
+
+lora_rank: 16
+lora_alpha: 32
+lora_dropout: 0.05
+target_modules: ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+
+max_length: 2048
+mixed_precision: "bf16"
+seed: 42
+
+output_dir: "./outputs/training"
+checkpoint_dir: "./outputs/checkpoints"
+
+# Imbalance Handling
+weighted_sampler: true
+class_weighted_loss: true
+focal_loss: false
+
+# Smoke Test Overrides
+smoke_test_train_samples: 4
+smoke_test_val_samples: 2
