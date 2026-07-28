@@ -30,7 +30,7 @@ env.bak/
 venv.bak/
 
 # Project specifics
-data/
+
 outputs/
 *.lmdb
 *.mdb
@@ -43,3 +43,5 @@ outputs/
 # OS generated files
 .DS_Store
 Thumbs.db
+data_subset/
+data_subset.zip
