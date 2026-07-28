@@ -36,7 +36,7 @@ def build_qwen_prompt(sample, image_obj):
         {
             "role": "user",
             "content": [
-                {"type": "image", "image": image_obj},
+                {"type": "image", "image": image_obj, "max_pixels": 256 * 256},
                 {"type": "text", "text": "Analyze this document for tampering. Output only JSON containing 'tampered' (bool), 'region' ([x,y,w,h]), and 'type' (string)."},
             ],
         },

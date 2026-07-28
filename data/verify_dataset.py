@@ -166,9 +166,22 @@ def main():
         logger.error("Split files not found! Run prepare_splits.py first.")
         return
         
+    doctamper_root = args.doctamper_root
+    sroie_root = args.sroie_root
+    
+    split_config_path = out_dir / "split_config.json"
+    if split_config_path.exists():
+        import json
+        with open(split_config_path, "r") as f:
+            split_config = json.load(f)
+        if doctamper_root == "./data":
+            doctamper_root = split_config.get("doctamper_root", doctamper_root)
+        if sroie_root == "C:\\Users\\USER\\.cache\\kagglehub\\datasets\\urbikn\\sroie-datasetv2\\versions\\4":
+            sroie_root = split_config.get("sroie_root", sroie_root)
+            
     logger.info("Initializing datasets...")
-    train_dataset = UnifiedDocForgeDataset(str(train_split_path), args.doctamper_root, args.sroie_root)
-    val_dataset = UnifiedDocForgeDataset(str(val_split_path), args.doctamper_root, args.sroie_root)
+    train_dataset = UnifiedDocForgeDataset(str(train_split_path), doctamper_root, sroie_root)
+    val_dataset = UnifiedDocForgeDataset(str(val_split_path), doctamper_root, sroie_root)
     
     logger.info(f"Train Dataset size: {len(train_dataset)}")
     logger.info(f"Validation Dataset size: {len(val_dataset)}")

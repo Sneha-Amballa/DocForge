@@ -98,8 +98,16 @@ def main():
     
     logger.info("Initializing dataset adapter...")
     split_file = "outputs/val_split.json"
-    doctamper_root = "./data"
-    sroie_root = "C:\\Users\\USER\\.cache\\kagglehub\\datasets\\urbikn\\sroie-datasetv2\\versions\\4"
+    import json
+    split_config_path = Path("outputs/split_config.json")
+    if split_config_path.exists():
+        with open(split_config_path, "r") as f:
+            split_config = json.load(f)
+        doctamper_root = split_config.get("doctamper_root", "./data")
+        sroie_root = split_config.get("sroie_root", "C:\\Users\\USER\\.cache\\kagglehub\\datasets\\urbikn\\sroie-datasetv2\\versions\\4")
+    else:
+        doctamper_root = "./data"
+        sroie_root = "C:\\Users\\USER\\.cache\\kagglehub\\datasets\\urbikn\\sroie-datasetv2\\versions\\4"
     
     dataset = QwenDatasetAdapter(split_file, doctamper_root, sroie_root)
     
